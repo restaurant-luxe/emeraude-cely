@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Émeraude Cély — Restaurant Gastronomique Français</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            900: '#062618',
+                            800: '#0a3622',
+                            700: '#0e4a30',
+                            600: '#146341',
+                            500: '#1b8054',
+                        },
+                        gold: {
+                            300: '#f3e5ab',
+                            400: '#e5c158',
+                            500: '#d4af37',
+                            600: '#aa8c2c',
+                            700: '#806820',
+                        },
+                        dark: {
+                            900: '#0d0d0d',
+                            800: '#141414',
+                            700: '#1e1e1e',
+                            600: '#2a2a2a',
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0d0d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0a3622;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.08);
+        }
+
+        .emerald-card {
+            background: linear-gradient(145deg, rgba(14, 74, 48, 0.3) 0%, rgba(10, 54, 34, 0.6) 100%);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-bg {
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.65), rgba(13, 13, 13, 0.95)),
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-200 font-sans antialiased selection:bg-gold-500 selection:text-dark-900 flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-emerald-800 text-gold-300 text-xs py-2 px-4 border-b border-gold-500/20">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-gold-400"></i> <span data-i18n="topbar_address">6 Rte de Saint-Germain, 77930 Cély</span></span>
+                <span class="hidden md:inline text-gold-500/40">|</span>
+                <span class="hidden md:flex items-center gap-1.5"><i class="fa-solid fa-clock text-gold-400"></i> <span data-i18n="topbar_hours">Ouvert jusqu'à 19:00</span></span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="tel:+33164386368" class="hover:text-white transition-colors flex items-center gap-1.5 font-semibold">
+                    <i class="fa-solid fa-phone text-gold-400"></i> +33 1 64 38 63 68
+                </a>
+                <button id="langToggleBtn" class="bg-dark-800/80 hover:bg-gold-500 hover:text-dark-900 border border-gold-500/30 px-2.5 py-0.5 rounded text-xs font-semibold transition-all">
+                    🌐 EN
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-dark-900/90 backdrop-blur-md border-b border-emerald-800/50 transition-all duration-300" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-emerald-800 border border-gold-500/40 flex items-center justify-center text-gold-400 font-cinzel font-bold text-xl group-hover:scale-105 transition-transform">
+                    É
+                </div>
+                <div>
+                    <span class="font-cinzel text-xl sm:text-2xl font-bold tracking-wider gold-gradient-text block">ÉMERAUDE CÉLY</span>
+                    <span class="text-[10px] uppercase tracking-widest text-emerald-500 block font-medium" data-i18n="subtitle">Restaurant Gastronomique</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="#accueil" class="hover:text-gold-400 transition-colors py-2 border-b-2 border-transparent hover:border-gold-500" data-i18n="nav_home">Accueil</a>
+                <a href="#menu" class="hover:text-gold-400 transition-colors py-2 border-b-2 border-transparent hover:border-gold-500" data-i18n="nav_menu">Carte & Menus</a>
+                <a href="#apropos" class="hover:text-gold-400 transition-colors py-2 border-b-2 border-transparent hover:border-gold-500" data-i18n="nav_about">À propos</a>
+                <a href="#services" class="hover:text-gold-400 transition-colors py-2 border-b-2 border-transparent hover:border-gold-500" data-i18n="nav_services">Prestations</a>
+                <a href="#contact" class="hover:text-gold-400 transition-colors py-2 border-b-2 border-transparent hover:border-gold-500" data-i18n="nav_contact">Contact</a>
+            </nav>
+
+            <!-- Reservation Button -->
+            <div class="hidden sm:flex items-center gap-3">
+                <button onclick="openBookingModal()" class="bg-gradient-to-r from-emerald-800 to-emerald-700 hover:from-gold-600 hover:to-gold-500 text-white hover:text-dark-900 border border-gold-500/40 font-semibold px-5 py-2.5 rounded-full text-sm shadow-lg shadow-emerald-950/50 hover:shadow-gold-500/20 transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fa-regular fa-calendar-check mr-2"></i><span data-i18n="btn_reserve">Réserver</span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-gold-400 text-2xl p-2 focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobileMenu" class="hidden md:hidden bg-dark-800 border-b border-emerald-800/80 px-4 pt-2 pb-6 space-y-3">
+            <a href="#accueil" class="mobile-link block py-2 border-b border-dark-700 hover:text-gold-400" data-i18n="nav_home">Accueil</a>
+            <a href="#menu" class="mobile-link block py-2 border-b border-dark-700 hover:text-gold-400" data-i18n="nav_menu">Carte & Menus</a>
+            <a href="#apropos" class="mobile-link block py-2 border-b border-dark-700 hover:text-gold-400" data-i18n="nav_about">À propos</a>
+            <a href="#services" class="mobile-link block py-2 border-b border-dark-700 hover:text-gold-400" data-i18n="nav_services">Prestations</a>
+            <a href="#contact" class="mobile-link block py-2 hover:text-gold-400" data-i18n="nav_contact">Contact</a>
+            <button onclick="openBookingModal()" class="w-full mt-3 bg-gradient-to-r from-emerald-800 to-emerald-700 text-gold-300 border border-gold-500/40 py-3 rounded-xl font-bold">
+                <i class="fa-regular fa-calendar-check mr-2"></i><span data-i18n="btn_reserve">Réserver une table</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section id="accueil" class="relative hero-bg min-h-[85vh] flex items-center justify-center px-4 py-20 text-center">
+            <div class="max-w-4xl mx-auto space-y-8 z-10">
+                
+                <!-- Rating badge -->
+                <div class="inline-flex items-center gap-3 bg-dark-900/80 backdrop-blur-md border border-gold-500/30 px-4 py-2 rounded-full text-sm">
+                    <div class="flex text-gold-400 text-xs gap-1">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <span class="font-bold text-white">4.3 / 5</span>
+                    <span class="text-gray-400 text-xs">(105 <span data-i18n="hero_reviews">avis Google</span>)</span>
+                    <span class="bg-emerald-800/80 text-emerald-300 text-[11px] font-semibold px-2 py-0.5 rounded-full border border-emerald-600/40">20–30 €</span>
+                </div>
+
+                <div class="space-y-4">
+                    <p class="text-gold-400 font-cinzel tracking-widest text-sm uppercase" data-i18n="hero_subtitle">Cuisine Française & Cadre Verdoyant</p>
+                    <h1 class="font-cinzel text-4xl sm:text-6xl lg:text-7xl font-bold text-white tracking-wide leading-tight">
+                        ÉMERAUDE CÉLY
+                    </h1>
+                    <p class="text-gray-300 max-w-2xl mx-auto text-base sm:text-lg font-light leading-relaxed" data-i18n="hero_desc">
+                        Une expérience culinaire raffinée au cœur du cadre verdoyant du golf de Cély. Savourez nos créations gastronomiques élaborées avec passion et des produits de saison.
+                    </p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                    <button onclick="openBookingModal()" class="w-full sm:w-auto bg-gold-500 hover:bg-gold-400 text-dark-900 font-bold px-8 py-4 rounded-full text-base transition-all shadow-xl shadow-gold-500/20 transform hover:scale-105">
+                        <i class="fa-solid fa-utensils mr-2"></i><span data-i18n="hero_btn_book">Réserver une table</span>
+                    </button>
+                    <a href="#menu" class="w-full sm:w-auto bg-dark-800/80 hover:bg-emerald-900 text-gray-200 border border-gold-500/30 font-semibold px-8 py-4 rounded-full text-base transition-all backdrop-blur-sm">
+                        <i class="fa-solid fa-book-open mr-2 text-gold-400"></i><span data-i18n="hero_btn_menu">Découvrir la Carte</span>
+                    </a>
+                </div>
+
+                <!-- Quick Highlights Bar -->
+                <div class="pt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto text-xs text-gray-300">
+                    <div class="bg-dark-900/60 backdrop-blur-md p-3 rounded-xl border border-emerald-800/40 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-tree text-emerald-400 text-base"></i>
+                        <span data-i18n="tag_golf">Cadre Verdoyant</span>
+                    </div>
+                    <div class="bg-dark-900/60 backdrop-blur-md p-3 rounded-xl border border-emerald-800/40 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-umbrella-beach text-emerald-400 text-base"></i>
+                        <span data-i18n="tag_terrasse">Grande Terrasse</span>
+                    </div>
+                    <div class="bg-dark-900/60 backdrop-blur-md p-3 rounded-xl border border-emerald-800/40 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-square-parking text-emerald-400 text-base"></i>
+                        <span data-i18n="tag_parking">Parking Gratuit</span>
+                    </div>
+                    <div class="bg-dark-900/60 backdrop-blur-md p-3 rounded-xl border border-emerald-800/40 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-wifi text-emerald-400 text-base"></i>
+                        <span data-i18n="tag_wifi">Wi-Fi Gratuit</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+                <span class="text-gold-400 font-cinzel text-xs uppercase tracking-widest" data-i18n="menu_subtitle">Gastronomie & Saveurs</span>
+                <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white" data-i18n="menu_title">Notre Carte & Suggestions</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto"></div>
+                <p class="text-gray-400 text-sm sm:text-base" data-i18n="menu_desc">Chaque plat est soigneusement préparé par notre chef pour vous offrir une fraîcheur inégalée et des mariages de saveurs raffinés.</p>
+            </div>
+
+            <!-- Menu Category Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12" id="menuTabs">
+                <button onclick="filterMenu('all')" class="menu-tab active bg-emerald-800 text-gold-300 border border-gold-500/40 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all">
+                    <span data-i18n="tab_all">Tout le Menu</span>
+                </button>
+                <button onclick="filterMenu('entrees')" class="menu-tab bg-dark-800 hover:bg-emerald-900 text-gray-300 border border-emerald-800 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all">
+                    <span data-i18n="tab_entrees">Entrées</span>
+                </button>
+                <button onclick="filterMenu('plats')" class="menu-tab bg-dark-800 hover:bg-emerald-900 text-gray-300 border border-emerald-800 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all">
+                    <span data-i18n="tab_plats">Plats Principaux</span>
+                </button>
+                <button onclick="filterMenu('fromages')" class="menu-tab bg-dark-800 hover:bg-emerald-900 text-gray-300 border border-emerald-800 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all">
+                    <span data-i18n="tab_fromages">Fromages</span>
+                </button>
+                <button onclick="filterMenu('desserts')" class="menu-tab bg-dark-800 hover:bg-emerald-900 text-gray-300 border border-emerald-800 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all">
+                    <span data-i18n="tab_desserts">Desserts</span>
+                </button>
+                <button onclick="filterMenu('boissons')" class="menu-tab bg-dark-800 hover:bg-emerald-900 text-gray-300 border border-emerald-800 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all">
+                    <span data-i18n="tab_boissons">Boissons & Vins</span>
+                </button>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="menuGrid">
+                
+                <!-- Entrées -->
+                <div class="menu-item entrees emerald-card gold-border-glow p-6 rounded-2xl flex justify-between items-start gap-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-800 text-gold-300 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-gold-500/30">Entrée</span>
+                            <h3 class="font-cinzel text-lg font-bold text-white">Terrine De Foie Gras Chutney Grenadine</h3>
+                        </div>
+                        <p class="text-xs text-gray-400" data-i18n="item_foiegras_desc">Foie gras maison sublimé par une touche sucrée-acidulée de grenadine.</p>
+                    </div>
+                    <span class="font-cinzel font-bold text-gold-400 text-lg whitespace-nowrap">14.00 €</span>
+                </div>
+
+                <div class="menu-item entrees emerald-card gold-border-glow p-6 rounded-2xl flex justify-between items-start gap-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-800 text-gold-300 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-gold-500/30">Entrée</span>
+                            <h3 class="font-cinzel text-lg font-bold text-white">Duo De Saint-Jacques Et Gambas</h3>
+                        </div>
+                        <p class="text-xs text-gray-400" data-i18n="item_saintjacques_desc">Coquilles Saint-Jacques poêlées et gambas rôties aux fines herbes.</p>
+                    </div>
+                    <span class="font-cinzel font-bold text-gold-400 text-lg whitespace-nowrap">16.50 €</span>
+                </div>
+
+                <!-- Plats -->
+                <div class="menu-item plats emerald-card gold-border-glow p-6 rounded-2xl flex justify-between items-start gap-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-gold-500 text-dark-900 text-[10px] uppercase font-bold px-2 py-0.5 rounded">Plat Principal</span>
+                            <h3 class="font-cinzel text-lg font-bold text-white">Filet Mignon De Veau Aux Petits Légumes</h3>
+                        </div>
+                        <p class="text-xs text-gray-400" data-i18n="item_filetmignon_desc">Viande tendre saisie à la perfection, accompagnée de légumes frais glacés au jus.</p>
+                    </div>
+                    <span class="font-cinzel font-bold text-gold-400 text-lg whitespace-nowrap">24.00 €</span>
+                </div>
+
+                <div class="menu-item plats emerald-card gold-border-glow p-6 rounded-2xl flex justify-between items-start gap-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-gold-500 text-dark-900 text-[10px] uppercase font-bold px-2 py-0.5 rounded">Plat Principal</span>
+                            <h3 class="font-cinzel text-lg font-bold text-white">Filet De Bar Rôti Légumes Croquants</h3>
+                        </div>
+                        <p class="text-xs text-gray-400" data-i18n="item_bar_desc">Pêche du jour rôtie sur peau, jus d'agrumes et légumes croquants de saison.</p>
+                    </div>
+                    <span class="font-cinzel font-bold text-gold-400 text-lg whitespace-nowrap">22.50 €</span>
+                </div>
+
+                <!-- Fromages -->
+                <div class="menu-item fromages emerald-card gold-border-glow p-6 rounded-2xl flex justify-between items-start gap-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-800 text-gold-300 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-gold-500/30">Fromages</span>
+                            <h3 class="font-cinzel text-lg font-bold text-white">Plateau De Fromages Sélectionnés</h3>
+                        </div>
+                        <p class="text-xs text-gray-400" data-i18n="item_fromages_desc">Sélection raffinée de fromages affinés de nos régions, pain artisanal.</p>
+                    </div>
+                    <span class="font-cinzel font-bold text-gold-400 text-lg whitespace-nowrap">9.50 €</span>
+                </div>
+
+                <!-- Desserts -->
+                <div class="menu-item desserts emerald-card gold-border-glow p-6 rounded-2xl flex justify-between items-start gap-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-800 text-gold-300 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-gold-500/30">Dessert</span>
+                            <h3 class="font-cinzel text-lg font-bold text-white">Assortiments De Gâteaux Gourmands</h3>
+                        </div>
+                        <p class="text-xs text-gray-400" data-i18n="item_gateaux_desc">Déclinable selon l'inspiration du chef pâtissier.</p>
+                    </div>
+                    <span class="font-cinzel font-bold text-gold-400 text-lg whitespace-nowrap">8.50 €</span>
+                </div>
+
+                <div class="menu-item desserts emerald-card gold-border-glow p-6 rounded-2xl flex justify-between items-start gap-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-800 text-gold-300 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-gold-500/30">Dessert</span>
+                            <h3 class="font-cinzel text-lg font-bold text-white">Pièce Montée Avec Supplément</h3>
+                        </div>
+                        <p class="text-xs text-gray-400" data-i18n="item_piecemontee_desc">Pour vos événements et réceptions (sur réservation préalable).</p>
+                    </div>
+                    <span class="font-cinzel font-bold text-gold-400 text-lg whitespace-nowrap">Sur devis</span>
+                </div>
+
+                <!-- Boissons -->
+                <div class="menu-item boissons emerald-card gold-border-glow p-6 rounded-2xl flex justify-between items-start gap-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-800 text-gold-300 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-gold-500/30">Vins & Boissons</span>
+                            <h3 class="font-cinzel text-lg font-bold text-white">Sélection Vins (Rouge, Blanc, Rosé)</h3>
+                        </div>
+                        <p class="text-xs text-gray-400" data-i18n="item_vins_desc">Au verre ou à la bouteille. Demandez notre carte des grands crûs.</p>
+                    </div>
+                    <span class="font-cinzel font-bold text-gold-400 text-lg whitespace-nowrap">Dès 5.00 €</span>
+                </div>
+
+                <div class="menu-item boissons emerald-card gold-border-glow p-6 rounded-2xl flex justify-between items-start gap-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-800 text-gold-300 text-[10px] uppercase font-bold px-2 py-0.5 rounded border border-gold-500/30">Rafraîchissements</span>
+                            <h3 class="font-cinzel text-lg font-bold text-white">Cocktails, Apéritifs, Eaux & Café</h3>
+                        </div>
+                        <p class="text-xs text-gray-400" data-i18n="item_cocktails_desc">Cocktails maison, Spiritueux, Eaux plates & gazeuses, Expressos.</p>
+                    </div>
+                    <span class="font-cinzel font-bold text-gold-400 text-lg whitespace-nowrap">Dès 3.00 €</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- About / Environment Section -->
+        <section id="apropos" class="py-20 bg-dark-800/60 border-y border-emerald-800/40 px-4">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="space-y-6">
+                    <span class="text-gold-400 font-cinzel text-xs uppercase tracking-widest" data-i18n="about_subtitle">Cadre d'Exception</span>
+                    <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white leading-tight" data-i18n="about_title">
+                        Un havre de paix au cœur du Domaine du Golf de Cély
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed text-sm sm:text-base" data-i18n="about_p1">
+                        Situé à Cély-en-Bière, l'Émeraude Cély vous accueille dans un environnement verdoyant et apaisant. Que ce soit pour un déjeuner d'affaires, un dîner romantique ou une réception de groupe, notre restaurant allie élégance et convivialité.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed text-sm" data-i18n="about_p2">
+                        Profitez de notre vaste terrasse ombragée lors des beaux jours avec vue sur la nature environnante. Une ambiance décontractée et calme idéale pour vos moments en famille ou entre amis.
+                    </p>
+
+                    <!-- Key highlights badges list -->
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-800/80 border border-gold-500/30 flex items-center justify-center text-gold-400 shrink-0">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm" data-i18n="feat1_title">Adapté aux Familles & Groupes</h4>
+                                <p class="text-gray-400 text-xs" data-i18n="feat1_desc">Espace enfants, chaises hautes & menus adaptés.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-800/80 border border-gold-500/30 flex items-center justify-center text-gold-400 shrink-0">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm" data-i18n="feat2_title">Accessibilité PMR</h4>
+                                <p class="text-gray-400 text-xs" data-i18n="feat2_desc">Accès et sanitaires adaptés fauteuils roulants.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Gallery Card Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Intérieur du restaurant" class="rounded-2xl border border-gold-500/20 object-cover h-64 w-full shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Plat gastronomique" class="rounded-2xl border border-gold-500/20 object-cover h-64 w-full shadow-lg translate-y-6">
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Services & Amenities Grid Section -->
+        <section id="services" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-gold-400 font-cinzel text-xs uppercase tracking-widest" data-i18n="services_subtitle">Confort & Équipements</span>
+                <h2 class="font-cinzel text-3xl font-bold text-white" data-i18n="services_title">Tous nos services disponibles</h2>
+                <div class="w-16 h-1 bg-gold-500 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                
+                <div class="emerald-card p-5 rounded-xl border border-emerald-800 flex flex-col items-center text-center space-y-3 hover:border-gold-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-full bg-emerald-900/80 border border-gold-500/30 flex items-center justify-center text-gold-400 text-xl">
+                        <i class="fa-solid fa-umbrella-beach"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-sm" data-i18n="srv_terrasse">Grande Terrasse</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="srv_terrasse_sub">Repas en extérieur aux beaux jours</p>
+                </div>
+
+                <div class="emerald-card p-5 rounded-xl border border-emerald-800 flex flex-col items-center text-center space-y-3 hover:border-gold-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-full bg-emerald-900/80 border border-gold-500/30 flex items-center justify-center text-gold-400 text-xl">
+                        <i class="fa-solid fa-square-parking"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-sm" data-i18n="srv_parking">Parking Gratuit</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="srv_parking_sub">Grand parking privé sur place</p>
+                </div>
+
+                <div class="emerald-card p-5 rounded-xl border border-emerald-800 flex flex-col items-center text-center space-y-3 hover:border-gold-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-full bg-emerald-900/80 border border-gold-500/30 flex items-center justify-center text-gold-400 text-xl">
+                        <i class="fa-solid fa-child"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-sm" data-i18n="srv_enfants">Espace Enfants</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="srv_enfants_sub">Chaises hautes & Menu enfant</p>
+                </div>
+
+                <div class="emerald-card p-5 rounded-xl border border-emerald-800 flex flex-col items-center text-center space-y-3 hover:border-gold-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-full bg-emerald-900/80 border border-gold-500/30 flex items-center justify-center text-gold-400 text-xl">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-sm" data-i18n="srv_paiment">Paiement Sans Contact</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="srv_paiment_sub">Cartes bancaires, NFC, Débit</p>
+                </div>
+
+                <div class="emerald-card p-5 rounded-xl border border-emerald-800 flex flex-col items-center text-center space-y-3 hover:border-gold-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-full bg-emerald-900/80 border border-gold-500/30 flex items-center justify-center text-gold-400 text-xl">
+                        <i class="fa-solid fa-wheelchair"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-sm" data-i18n="srv_pmr">Accès Fauteuil Roulant</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="srv_pmr_sub">Entrée & sanitaires accessibles</p>
+                </div>
+
+                <div class="emerald-card p-5 rounded-xl border border-emerald-800 flex flex-col items-center text-center space-y-3 hover:border-gold-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-full bg-emerald-900/80 border border-gold-500/30 flex items-center justify-center text-gold-400 text-xl">
+                        <i class="fa-solid fa-glass-cheers"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-sm" data-i18n="srv_bar">Bar & Cocktails</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="srv_bar_sub">Large sélection de boissons</p>
+                </div>
+
+                <div class="emerald-card p-5 rounded-xl border border-emerald-800 flex flex-col items-center text-center space-y-3 hover:border-gold-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-full bg-emerald-900/80 border border-gold-500/30 flex items-center justify-center text-gold-400 text-xl">
+                        <i class="fa-solid fa-wifi"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-sm" data-i18n="srv_wifi">Wi-Fi Haut Débit</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="srv_wifi_sub">Accès internet gratuit</p>
+                </div>
+
+                <div class="emerald-card p-5 rounded-xl border border-emerald-800 flex flex-col items-center text-center space-y-3 hover:border-gold-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-full bg-emerald-900/80 border border-gold-500/30 flex items-center justify-center text-gold-400 text-xl">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-sm" data-i18n="srv_groupes">Groupes & Événements</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="srv_groupes_sub">Réservation de groupes acceptée</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Location & Contact Section -->
+        <section id="contact" class="py-20 bg-dark-800/80 border-t border-emerald-800/50 px-4">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <div class="space-y-6">
+                    <span class="text-gold-400 font-cinzel text-xs uppercase tracking-widest" data-i18n="contact_subtitle">Localisation & Contact</span>
+                    <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white" data-i18n="contact_title">Nous trouver & Réserver</h2>
+                    <p class="text-gray-300 text-sm leading-relaxed" data-i18n="contact_desc">
+                        Nous sommes situés à Cély, au sein du complexe de Golf. Un parking gratuit est disponible directement devant l'établissement.
+                    </p>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-dark-900 border border-emerald-800/60">
+                            <i class="fa-solid fa-location-dot text-gold-400 text-xl mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-bold text-sm" data-i18n="contact_addr_title">Adresse</h4>
+                                <p class="text-gray-300 text-xs mt-0.5">6 Rte de Saint-Germain, 77930 Cély, France</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-dark-900 border border-emerald-800/60">
+                            <i class="fa-solid fa-phone text-gold-400 text-xl mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-bold text-sm" data-i18n="contact_phone_title">Téléphone</h4>
+                                <a href="tel:+33164386368" class="text-gold-400 hover:underline text-xs mt-0.5 block font-semibold">+33 1 64 38 63 68</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-dark-900 border border-emerald-800/60">
+                            <i class="fa-solid fa-clock text-gold-400 text-xl mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-bold text-sm" data-i18n="contact_hours_title">Horaires de service</h4>
+                                <p class="text-gray-300 text-xs mt-0.5" data-i18n="contact_hours_detail">Ouvert du Mardi au Dimanche (Fermeture à 19:00)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Call & Directions Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-3 pt-4">
+                        <a href="tel:+33164386368" class="flex-1 bg-emerald-800 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-xl text-center text-sm transition-colors border border-gold-500/30 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-phone"></i> <span data-i18n="btn_call">Appeler le restaurant</span>
+                        </a>
+                        <a href="https://maps.google.com/?q=6+Rte+de+Saint-Germain,+77930+C%C3%A9ly,+France" target="_blank" rel="noopener noreferrer" class="flex-1 bg-gold-500 hover:bg-gold-400 text-dark-900 font-bold py-3 px-6 rounded-xl text-center text-sm transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-route"></i> <span data-i18n="btn_itinerary">Itinéraire Google Maps</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Google Maps Embed Simulation Frame -->
+                <div class="rounded-2xl overflow-hidden border border-emerald-800/80 shadow-2xl bg-dark-900 min-h-[350px] relative flex items-center justify-center">
+                    <iframe 
+                        title="Localisation Émeraude Cély" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2638.253018241088!2d2.525281476839352!3d48.45265437125016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5f039d911b305%3A0x6b10eb96425d0aa9!2s6%20Rte%20de%20Saint-Germain%2C%2077930%20C%C3%A9ly%2C%20France!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr" 
+                        class="w-full h-full absolute inset-0 border-0 opacity-85 hover:opacity-100 transition-opacity" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 text-gray-400 text-xs border-t border-emerald-900/60 py-12 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div>
+                <div class="font-cinzel text-xl font-bold gold-gradient-text">ÉMERAUDE CÉLY</div>
+                <p class="text-gray-500 mt-1" data-i18n="footer_rights">© 2026 Émeraude Cély. Tous droits réservés.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="#accueil" class="hover:text-gold-400 transition-colors" data-i18n="nav_home">Accueil</a>
+                <a href="#menu" class="hover:text-gold-400 transition-colors" data-i18n="nav_menu">Carte</a>
+                <a href="#apropos" class="hover:text-gold-400 transition-colors" data-i18n="nav_about">À propos</a>
+                <a href="#contact" class="hover:text-gold-400 transition-colors" data-i18n="nav_contact">Contact</a>
+            </div>
+            <div class="flex items-center gap-4 text-lg">
+                <a href="tel:+33164386368" class="text-gold-400 hover:text-white transition-colors" title="Téléphone"><i class="fa-solid fa-phone"></i></a>
+                <a href="https://maps.google.com/?q=6+Rte+de+Saint-Germain,+77930+C%C3%A9ly,+France" target="_blank" class="text-gold-400 hover:text-white transition-colors" title="Localisation"><i class="fa-solid fa-map-pin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Table Reservation Modal -->
+    <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-gold-500/40 w-full max-w-md rounded-2xl p-6 relative shadow-2xl space-y-5">
+            
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center space-y-1">
+                <h3 class="font-cinzel text-2xl font-bold text-white" data-i18n="modal_title">Réserver une Table</h3>
+                <p class="text-xs text-gold-400" data-i18n="modal_subtitle">Émeraude Cély — Restaurant Gastronomique</p>
+            </div>
+
+            <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="label_name">Nom Complet</label>
+                    <input type="text" required class="w-full bg-dark-900 border border-emerald-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-gold-500" placeholder="ex: Jean Dupont">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="label_phone">Téléphone</label>
+                        <input type="tel" required class="w-full bg-dark-900 border border-emerald-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-gold-500" placeholder="06 12 34 56 78">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="label_guests">Couverts</label>
+                        <select class="w-full bg-dark-900 border border-emerald-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-gold-500">
+                            <option>2 personnes</option>
+                            <option>3 personnes</option>
+                            <option>4 personnes</option>
+                            <option>5+ personnes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="label_date">Date</label>
+                        <input type="date" required class="w-full bg-dark-900 border border-emerald-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="label_time">Heure</label>
+                        <input type="time" required class="w-full bg-dark-900 border border-emerald-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-gold-500">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-gold-500 hover:bg-gold-400 text-dark-900 font-bold py-3 rounded-xl text-sm transition-colors mt-2">
+                    <span data-i18n="btn_confirm_booking">Confirmer la demande</span>
+                </button>
+            </form>
+
+            <div id="bookingSuccessMsg" class="hidden text-center py-6 space-y-3">
+                <div class="w-12 h-12 bg-emerald-800 text-gold-400 rounded-full flex items-center justify-center mx-auto text-2xl">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h4 class="text-white font-bold text-lg" data-i18n="success_title">Demande Envoyée !</h4>
+                <p class="text-xs text-gray-300" data-i18n="success_desc">Nous vous contacterons par téléphone pour confirmer votre réservation.</p>
+                <button onclick="closeBookingModal()" class="bg-dark-900 border border-emerald-800 text-gray-300 text-xs px-4 py-2 rounded-lg hover:text-white">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Dictionary for bilingual switching (FR / EN)
+        const i18n = {
+            fr: {
+                topbar_address: "6 Rte de Saint-Germain, 77930 Cély",
+                topbar_hours: "Ouvert jusqu'à 19:00",
+                subtitle: "Restaurant Gastronomique",
+                nav_home: "Accueil",
+                nav_menu: "Carte & Menus",
+                nav_about: "À propos",
+                nav_services: "Prestations",
+                nav_contact: "Contact",
+                btn_reserve: "Réserver",
+                hero_subtitle: "Cuisine Française & Cadre Verdoyant",
+                hero_desc: "Une expérience culinaire raffinée au cœur du cadre verdoyant du golf de Cély. Savourez nos créations gastronomiques élaborées avec passion.",
+                hero_reviews: "avis Google",
+                hero_btn_book: "Réserver une table",
+                hero_btn_menu: "Découvrir la Carte",
+                tag_golf: "Cadre Verdoyant",
+                tag_terrasse: "Grande Terrasse",
+                tag_parking: "Parking Gratuit",
+                tag_wifi: "Wi-Fi Gratuit",
+                menu_subtitle: "Gastronomie & Saveurs",
+                menu_title: "Notre Carte & Suggestions",
+                menu_desc: "Chaque plat est soigneusement préparé par notre chef pour vous offrir une fraîcheur inégalée.",
+                tab_all: "Tout le Menu",
+                tab_entrees: "Entrées",
+                tab_plats: "Plats Principaux",
+                tab_fromages: "Fromages",
+                tab_desserts: "Desserts",
+                tab_boissons: "Boissons & Vins",
+                item_foiegras_desc: "Foie gras maison sublimé par une touche sucrée-acidulée de grenadine.",
+                item_saintjacques_desc: "Coquilles Saint-Jacques poêlées et gambas rôties aux fines herbes.",
+                item_filetmignon_desc: "Viande tendre saisie à la perfection, accompagnée de légumes frais glacés au jus.",
+                item_bar_desc: "Pêche du jour rôtie sur peau, jus d'agrumes et légumes croquants de saison.",
+                item_fromages_desc: "Sélection raffinée de fromages affinés de nos régions, pain artisanal.",
+                item_gateaux_desc: "Déclinable selon l'inspiration du chef pâtissier.",
+                item_piecemontee_desc: "Pour vos événements et réceptions (sur réservation préalable).",
+                item_vins_desc: "Au verre ou à la bouteille. Demandez notre carte des grands crûs.",
+                item_cocktails_desc: "Cocktails maison, Spiritueux, Eaux plates & gazeuses, Expressos.",
+                about_subtitle: "Cadre d'Exception",
+                about_title: "Un havre de paix au cœur du Domaine du Golf de Cély",
+                about_p1: "Situé à Cély-en-Bière, l'Émeraude Cély vous accueille dans un environnement verdoyant et apaisant.",
+                about_p2: "Profitez de notre vaste terrasse ombragée lors des beaux jours avec vue sur la nature environnante.",
+                feat1_title: "Adapté aux Familles & Groupes",
+                feat1_desc: "Espace enfants, chaises hautes & menus adaptés.",
+                feat2_title: "Accessibilité PMR",
+                feat2_desc: "Accès et sanitaires adaptés fauteuils roulants.",
+                services_subtitle: "Confort & Équipements",
+                services_title: "Tous nos services disponibles",
+                srv_terrasse: "Grande Terrasse",
+                srv_terrasse_sub: "Repas en extérieur aux beaux jours",
+                srv_parking: "Parking Gratuit",
+                srv_parking_sub: "Grand parking privé sur place",
+                srv_enfants: "Espace Enfants",
+                srv_enfants_sub: "Chaises hautes & Menu enfant",
+                srv_paiment: "Paiement Sans Contact",
+                srv_paiment_sub: "Cartes bancaires, NFC, Débit",
+                srv_pmr: "Accès Fauteuil Roulant",
+                srv_pmr_sub: "Entrée & sanitaires accessibles",
+                srv_bar: "Bar & Cocktails",
+                srv_bar_sub: "Large sélection de boissons",
+                srv_wifi: "Wi-Fi Haut Débit",
+                srv_wifi_sub: "Accès internet gratuit",
+                srv_groupes: "Groupes & Événements",
+                srv_groupes_sub: "Réservation de groupes acceptée",
+                contact_subtitle: "Localisation & Contact",
+                contact_title: "Nous trouver & Réserver",
+                contact_desc: "Nous sommes situés à Cély, au sein du complexe de Golf. Un parking gratuit est disponible.",
+                contact_addr_title: "Adresse",
+                contact_phone_title: "Téléphone",
+                contact_hours_title: "Horaires de service",
+                contact_hours_detail: "Ouvert du Mardi au Dimanche (Fermeture à 19:00)",
+                btn_call: "Appeler le restaurant",
+                btn_itinerary: "Itinéraire Google Maps",
+                footer_rights: "© 2026 Émeraude Cély. Tous droits réservés.",
+                modal_title: "Réserver une Table",
+                modal_subtitle: "Émeraude Cély — Restaurant Gastronomique",
+                label_name: "Nom Complet",
+                label_phone: "Téléphone",
+                label_guests: "Couverts",
+                label_date: "Date",
+                label_time: "Heure",
+                btn_confirm_booking: "Confirmer la demande",
+                success_title: "Demande Envoyée !",
+                success_desc: "Nous vous contacterons par téléphone pour confirmer votre réservation."
+            },
+            en: {
+                topbar_address: "6 Rte de Saint-Germain, 77930 Cély, France",
+                topbar_hours: "Open until 7:00 PM",
+                subtitle: "Gourmet French Restaurant",
+                nav_home: "Home",
+                nav_menu: "Menu",
+                nav_about: "About Us",
+                nav_services: "Amenities",
+                nav_contact: "Contact",
+                btn_reserve: "Book a Table",
+                hero_subtitle: "French Cuisine & Greenery",
+                hero_desc: "A refined dining experience in the heart of Cély golf course green surroundings. Enjoy our gourmet creations made with passion.",
+                hero_reviews: "Google reviews",
+                hero_btn_book: "Reserve a table",
+                hero_btn_menu: "View Menu",
+                tag_golf: "Green Surroundings",
+                tag_terrasse: "Large Terrace",
+                tag_parking: "Free Parking",
+                tag_wifi: "Free Wi-Fi",
+                menu_subtitle: "Gastronomy & Flavors",
+                menu_title: "Our Menu & Suggestions",
+                menu_desc: "Every dish is carefully prepared by our chef to guarantee unmatched freshness.",
+                tab_all: "Full Menu",
+                tab_entrees: "Appetizers",
+                tab_plats: "Main Courses",
+                tab_fromages: "Cheeses",
+                tab_desserts: "Desserts",
+                tab_boissons: "Drinks & Wines",
+                item_foiegras_desc: "Homemade Foie Gras complemented with a sweet-tart pomegranate chutney.",
+                item_saintjacques_desc: "Pan-seared scallops and roasted gambas with fine herbs.",
+                item_filetmignon_desc: "Tender veal filet mignon seared to perfection with glazed fresh vegetables.",
+                item_bar_desc: "Pan-roasted sea bass filet, citrus reduction and crisp seasonal vegetables.",
+                item_fromages_desc: "Refined selection of aged regional cheeses served with artisanal bread.",
+                item_gateaux_desc: "Selection of delicious pastries created by our pastry chef.",
+                item_piecemontee_desc: "Custom croquembouche / wedding cake for receptions (upon reservation).",
+                item_vins_desc: "By the glass or bottle. Ask for our wine list.",
+                item_cocktails_desc: "House cocktails, spirits, sparkling water, espresso.",
+                about_subtitle: "Exceptional Setting",
+                about_title: "A peaceful haven in Cély Golf Estate",
+                about_p1: "Located in Cély-en-Bière, Émeraude Cély welcomes you into a serene green scenery.",
+                about_p2: "Enjoy our spacious shaded terrace with picturesque views over nature.",
+                feat1_title: "Family & Group Friendly",
+                feat1_desc: "High chairs, kids menu & spacious seating.",
+                feat2_title: "Wheelchair Accessible",
+                feat2_desc: "Accessible entrance and facilities.",
+                services_subtitle: "Amenities & Services",
+                services_title: "All Available Amenities",
+                srv_terrasse: "Large Terrace",
+                srv_terrasse_sub: "Outdoor dining in nice weather",
+                srv_parking: "Free Parking",
+                srv_parking_sub: "Large private parking lot on site",
+                srv_enfants: "Kids Friendly",
+                srv_enfants_sub: "High chairs & Children's menu",
+                srv_paiment: "Contactless Payment",
+                srv_paiment_sub: "Credit cards, Debit & NFC",
+                srv_pmr: "Wheelchair Accessible",
+                srv_pmr_sub: "Accessible entrance & restroom",
+                srv_bar: "Bar & Cocktails",
+                srv_bar_sub: "Wide selection of beverages",
+                srv_wifi: "High-Speed Wi-Fi",
+                srv_wifi_sub: "Free internet access",
+                srv_groupes: "Groups & Events",
+                srv_groupes_sub: "Group reservations accepted",
+                contact_subtitle: "Location & Contact",
+                contact_title: "Find Us & Book",
+                contact_desc: "We are located in Cély inside the Golf Estate. Free private parking available.",
+                contact_addr_title: "Address",
+                contact_phone_title: "Phone",
+                contact_hours_title: "Opening Hours",
+                contact_hours_detail: "Open Tuesday to Sunday (Closes at 7:00 PM)",
+                btn_call: "Call Restaurant",
+                btn_itinerary: "Google Maps Directions",
+                footer_rights: "© 2026 Émeraude Cély. All rights reserved.",
+                modal_title: "Reserve a Table",
+                modal_subtitle: "Émeraude Cély — Gourmet Restaurant",
+                label_name: "Full Name",
+                label_phone: "Phone Number",
+                label_guests: "Guests",
+                label_date: "Date",
+                label_time: "Time",
+                btn_confirm_booking: "Confirm Request",
+                success_title: "Request Sent!",
+                success_desc: "We will call you shortly to confirm your table reservation."
+            }
+        };
+
+        let currentLang = 'fr';
+
+        // Toggle Language Function
+        document.getElementById('langToggleBtn').addEventListener('click', () => {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            document.getElementById('langToggleBtn').textContent = currentLang === 'fr' ? '🌐 EN' : '🌐 FR';
+            
+            document.querySelectorAll('[data-i18n]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n');
+                if (i18n[currentLang] && i18n[currentLang][key]) {
+                    elem.textContent = i18n[currentLang][key];
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Interactive Menu Filtering
+        function filterMenu(category) {
+            const items = document.querySelectorAll('.menu-item');
+            const tabs = document.querySelectorAll('.menu-tab');
+
+            tabs.forEach(tab => {
+                tab.classList.remove('active', 'bg-emerald-800', 'text-gold-300');
+                tab.classList.add('bg-dark-800', 'text-gray-300');
+            });
+
+            event.currentTarget.classList.add('active', 'bg-emerald-800', 'text-gold-300');
+            event.currentTarget.classList.remove('bg-dark-800', 'text-gray-300');
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Booking Modal Handlers
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.remove('hidden');
+            document.getElementById('bookingForm').classList.remove('hidden');
+            document.getElementById('bookingSuccessMsg').classList.add('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        function handleBookingSubmit(e) {
+            e.preventDefault();
+            document.getElementById('bookingForm').classList.add('hidden');
+            document.getElementById('bookingSuccessMsg').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
